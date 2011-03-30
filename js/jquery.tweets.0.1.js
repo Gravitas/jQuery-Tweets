@@ -39,11 +39,16 @@
 		        function(data) {
 		            $.each(data.results, function(i, tweet) {
 		                if(tweet.text !== undefined) {
-		                    $(obj).append(options.before+tweet.text+options.after);
+		                    $(obj).append(options.before+linkify(tweet.text)+options.after);
 		                }
 		            });
 		        }
 		    );
 		});
 	};
+
+        function linkify(text) {
+             var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+             return text.replace(exp,"<a href='$1'>$1</a>");
+        }
 })(jQuery);
